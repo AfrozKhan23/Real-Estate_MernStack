@@ -1,0 +1,529 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Tilt+Neon&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+}
+
+.header {
+  height: 50px;
+  background-color: darkcyan;
+  color: white;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Quicksand", sans-serif;
+
+  .link {
+    text-decoration: none;
+  }
+  .header-title {
+    font-size: 35px;
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    font-style: italic;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  .header-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 70px;
+    margin-right: 40px;
+    font-size: 22px;
+    color: white;
+    align-items: center;
+    .head-nav {
+      cursor: pointer;
+    }
+    .head-nav:hover {
+      color: rgb(255, 255, 255, 0.8);
+      font-size: 23px;
+    }
+
+    .login-btn {
+      background-color: transparent;
+      color: maroon;
+      width: 140px;
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      outline: none;
+      border: none;
+      font-size: 22px;
+      font: bold;
+      cursor: pointer;
+    }
+    .login-icon {
+      padding-top: 4px;
+    }
+    .login-btn:hover {
+      color: whitesmoke;
+    }
+  }
+}
+
+.form {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  opacity: 0.9;
+  font-family: "Quicksand", sans-serif;
+
+  .form-box {
+    height: 350px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: 1px solid blueviolet;
+    padding: 20px;
+    align-items: center;
+    background-color: aliceblue;
+    opacity: 0.9;
+    border-radius: 10px;
+
+    .form-heading {
+      font-size: 35px;
+    }
+
+    .form-input1 {
+      width: 250px;
+      height: 35px;
+      margin-top: 20px;
+      padding-left: 20px;
+      border: none;
+      background-color: aqua;
+      border-radius: 10px;
+    }
+    .form-input2 {
+      width: 250px;
+      height: 35px;
+      margin-top: 10px;
+      padding-left: 20px;
+      border: none;
+      background-color: aqua;
+      border-radius: 10px;
+    }
+
+    .form-btn {
+      width: 270px;
+      height: 40px;
+      margin-top: 20px;
+      border: none;
+      background-color: gold;
+      color: black;
+      font-weight: bold;
+      font-size: 16px;
+      border-radius: 10px;
+    }
+
+    .form-error {
+      font-size: 18px;
+      margin-top: -15px;
+      color: red;
+    }
+  }
+}
+
+.hero {
+  background-image: url("../images/bg-home.jpg");
+  background-size: cover;
+  height: 90vh;
+  width: 100%;
+  color: white;
+  opacity: 0.9;
+  padding-top: 30px;
+  text-shadow: 1px 1px 1px black;
+  font-family: "Quicksand", sans-serif;
+
+  .hero-content {
+    padding: 40px;
+  }
+  .hero-h2 {
+    font-size: 50px;
+    margin-bottom: 20px;
+
+    .hero-house {
+      color: cadetblue;
+    }
+  }
+  .hero-h3 {
+    font-size: 35px;
+    margin-bottom: 50px;
+  }
+  .hero-para {
+    font-size: 20px;
+    margin-bottom: 10px;
+    width: 700px;
+  }
+}
+
+.home-properties {
+  background-color: whitesmoke;
+  display: flex;
+  gap: 10px;
+  font-family: "Quicksand", sans-serif;
+  flex-wrap: wrap;
+
+  .prop-ul {
+    list-style: none;
+    padding: 20px;
+
+    li {
+      font-size: 30px;
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+    .prop-img {
+      border-radius: 20%;
+      cursor: pointer;
+      box-shadow: 1px 1px 1px darkslategrey;
+    }
+    .prop-name {
+      font-size: 30px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .prop-address {
+      font-size: 20px;
+      text-align: center;
+      font-weight: 400;
+    }
+  }
+}
+
+.property-details {
+  background-color: whitesmoke;
+  font-family: "Quicksand", sans-serif;
+
+  .pro-header {
+    width: 100%;
+    background-color: cornflowerblue;
+    color: white;
+    display: flex;
+    height: 70px;
+    align-items: center;
+  }
+
+  span {
+    font-size: 25px;
+    text-decoration: underline;
+    margin-right: 500px;
+    padding-left: 10px;
+    cursor: pointer;
+  }
+
+  h2 {
+    font-size: 40px;
+  }
+
+  .pro-grid {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    padding-top: 50px;
+  }
+
+  .pro-images {
+    display: flex;
+    gap: 30px;
+    padding-top: 20px;
+    padding-left: 30px;
+    height: 400px;
+    width: 80%;
+    overflow: scroll;
+    margin-left: 20px;
+    padding: auto;
+
+    img {
+      border-radius: 20px;
+      width: 500px;
+      height: 400px;
+    }
+  }
+  .pro-vid {
+    gap: 60px;
+    padding-left: 10px;
+    padding-top: 30px;
+
+    video {
+      width: 500px;
+      height: 300px;
+    }
+  }
+  .prop-details {
+    display: flex;
+    gap: 60px;
+    padding-top: 50px;
+    padding-left: 120px;
+    font-size: 35px;
+  }
+}
+
+.reviews {
+  background-color: aqua;
+  padding: 70px;
+  display: flex;
+  .rev {
+    display: flex;
+    gap: 10px;
+  }
+
+  .rev-img {
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+  }
+  .rev-content {
+    display: flex;
+    flex-direction: column;
+    .rev-name {
+      font-size: 20px;
+      font-weight: 600;
+      font-family: "Quicksand", sans-serif;
+    }
+    .rev-message {
+      margin-top: 5px;
+      font-size: 14px;
+      font-weight: 400;
+      font-family: "Quicksand", sans-serif;
+    }
+  }
+}
+
+.footer {
+  height: 30vh;
+  background-color: black;
+  opacity: 0.9;
+  color: white;
+  display: grid;
+  padding-top: 50px;
+  grid-template-columns: 4fr 4fr 4fr;
+  font-family: "Quicksand", sans-serif;
+
+  .footer-1 {
+    text-align: center;
+    .footer-head {
+      font-weight: 600;
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+    .footer-links {
+      padding-top: 6px;
+      cursor: pointer;
+    }
+  }
+
+  .footer-2 {
+    text-align: center;
+
+    .footer-head {
+      font-weight: 600;
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+    .footer-input {
+      height: 25px;
+      width: 250px;
+      margin-top: 15px;
+      text-align: center;
+      padding: 5px;
+      font-size: 12px;
+    }
+    .footer-btn {
+      margin-top: 25px;
+      height: 45px;
+      width: 200px;
+      background-color: transparent;
+      color: white;
+      padding: 12px;
+      border: 1px solid white;
+      text-align: center;
+      border-radius: 40px;
+      cursor: pointer;
+    }
+  }
+
+  .footer-3 {
+    text-align: center;
+    .footer-head {
+      font-weight: 600;
+      margin-bottom: 15px;
+      font-size: 20px;
+    }
+
+    .footer-content {
+      padding-top: 8px;
+    }
+    .footer-socials {
+      display: flex;
+      gap: 20px;
+      padding-top: 25px;
+      margin-left: 150px;
+      cursor: pointer;
+    }
+  }
+}
+
+.admin {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 4fr 8fr;
+  font-family: "Quicksand", sans-serif;
+  overflow: scroll;
+
+  .admin-aside {
+    background-color: aliceblue;
+  }
+  .aside-h1 {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 40px;
+    color: chocolate;
+  }
+
+  label {
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 20px;
+  }
+  .admin-input1 {
+    width: 200px;
+    height: 35px;
+    margin-top: 10px;
+    margin-left: 20px;
+    padding-left: 20px;
+    border: none;
+    background-color: aqua;
+    border-radius: 10px;
+    outline: none;
+  }
+  .admin-input2 {
+    width: 200px;
+    height: 35px;
+    margin-top: 10px;
+    margin-left: 20px;
+    padding-left: 20px;
+    border: none;
+    background-color: aqua;
+    border-radius: 10px;
+    outline: none;
+  }
+  .admin-input3 {
+    width: 200px;
+    height: 35px;
+    margin-top: 10px;
+    margin-left: 20px;
+    padding-left: 20px;
+    border: none;
+    background-color: aqua;
+    border-radius: 10px;
+    outline: none;
+  }
+  .admin-textarea {
+    width: 180px;
+    height: 35px;
+    margin-top: 30px;
+    margin-left: 20px;
+    padding: 15px;
+    border: none;
+    background-color: aqua;
+    border-radius: 10px;
+    outline: none;
+  }
+  .admin-img {
+    width: 250px;
+    padding-left: 40px;
+    margin-top: 40px;
+  }
+
+  .admin-video {
+    width: 250px;
+    padding-left: 45px;
+    margin-top: 40px;
+  }
+  .prop-btn {
+    height: 40px;
+    width: 150px;
+    background-color: deepskyblue;
+    color: cornsilk;
+    margin-top: 40px;
+    margin-left: 100px;
+    margin-bottom: 20px;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    border-radius: 50px;
+    cursor: pointer;
+  }
+  .admin-error {
+    text-align: center;
+    margin-top: 2px;
+    color: red;
+  }
+
+  .admin-main {
+    background-color: whitesmoke;
+    width: 100%;
+    overflow: scroll;
+  }
+  .admin-header {
+    display: flex;
+    align-items: center;
+    padding-left: 50px;
+    gap: 115px;
+    background-color: beige;
+    height: 50px;
+    font-weight: 500;
+    font-size: 18px;
+  }
+  .admin-ul {
+    display: flex;
+    list-style: none;
+    gap: 60px;
+    padding: 10px;
+    padding-left: 20px;
+
+    .dashboard-img {
+      height: 90px;
+      width: 140px;
+    }
+    .prop-name {
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+      width: 110px;
+    }
+
+    .prop-address {
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+      text-align: left;
+      width: 120px;
+    }
+
+    .prop-phone {
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+      width: 90px;
+      text-align: left;
+    }
+
+    .delete-icon {
+      padding-top: 40px;
+      cursor: pointer;
+      padding-right: 50px;
+    }
+  }
+}
