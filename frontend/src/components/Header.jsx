@@ -74,7 +74,7 @@ const Header = () => {
             <span>
               <LoginIcon fontSize="small" className="login-icon" />
             </span>
-            <span>Dashboard</span>
+            <span>Login</span>
           </button>
         )}
       </span>
