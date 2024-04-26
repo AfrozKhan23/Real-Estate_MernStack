@@ -80,8 +80,6 @@ const AdminPanel = () => {
 
       formData.append("videos", formVideo);
       actions.resetForm();
-      console.log(values);
-      console.log(actions);
 
       try {
         const response = await axios.post(
