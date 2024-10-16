@@ -7,7 +7,7 @@ import { useState } from "react";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [error, setError] = useState("");
 
   const formik = useFormik({
     initialValues: {
@@ -16,38 +16,37 @@ const Login = () => {
     },
     validationSchema: yup.object({
       email: yup.string().required("Email is Required"),
-      password: yup.string().required("password is Required"),
+      // password: yup.string().required("Password is Required"),
     }),
     onSubmit: async (values) => {
-      const formEmail = values.email;
-      const formPassword = values.password;
+      const { email, password } = values;
+      console.log("Form Submitted", values);
 
       try {
-        const response = await axios.post(`${pathUrl}api/v1/admin`, {
-          email: formEmail,
-          password: formPassword,
+        const response = await axios.post(`${pathUrl}api/v1/admin/login`, {
+          email,
+          password,
         });
-        if (response.status === 200) {
-          setIsLoggedIn(true);
+
+        if (response) {
+          const { token } = response.data;
+          // console.log(response.data);
+          // console.log(token);
+          localStorage.setItem("token", token);
           localStorage.setItem("isLoggedIn", true);
           navigate("/admin");
         } else {
-          alert("Invalid email or password");
+          setError("Invalid email or password");
         }
       } catch (error) {
         console.error("Error logging in:", error);
-        alert("An error occurred while logging in");
+        setError("An error occurred while logging in");
       }
     },
   });
 
   return (
-    <form
-      className="form"
-      onSubmit={formik.handleSubmit}
-      action="/"
-      method="post"
-    >
+    <form className="form" onSubmit={formik.handleSubmit}>
       <div className="form-box">
         <h1 className="form-heading">Admin Login</h1>
         <input
@@ -57,6 +56,7 @@ const Login = () => {
           id="email"
           placeholder="Enter admin email"
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
         />
         <span className="form-error">{formik.errors.email}</span>
         <input
@@ -66,8 +66,11 @@ const Login = () => {
           id="password"
           placeholder="Enter admin password"
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
         />
         <span className="form-error">{formik.errors.password}</span>
+        {error && <p className="form-error">{error}</p>}{" "}
+        {/* Display any error message */}
         <button type="submit" className="form-btn">
           Login
         </button>

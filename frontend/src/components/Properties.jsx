@@ -12,34 +12,59 @@ const Properties = () => {
   };
 
   useEffect(() => {
-    (async () => {
+    const fetchProperties = async () => {
       try {
-        const response = await axios.get(`${pathUrl}api/v1/property`);
+        const token = localStorage.getItem("token");
+
+        const response = await axios.get(`${pathUrl}api/v1/property`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setProperties(response.data);
       } catch (error) {
-        console.log(error.message);
+        console.error("Error fetching properties:", error.message);
       }
-    })();
+    };
+
+    fetchProperties();
   }, []);
 
   useEffect(() => {
-    (async () => {
+    const updateProperty = async () => {
+      if (!propertyId) return;
+
       try {
+        const token = localStorage.getItem("token");
+
         const response = await axios.put(
-          `${pathUrl}api/v1/property/${propertyId}`
+          `${pathUrl}api/v1/property/${propertyId}`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // Include the token in the request
+            },
+          }
         );
-        setProperties(response.data);
+        setProperties((prevProperties) =>
+          prevProperties.map((prop) =>
+            prop._id === propertyId ? response.data : prop
+          )
+        );
       } catch (error) {
-        console.log(error.message);
+        console.error("Error updating property:", error.message);
       }
-    })();
+    };
+
+    updateProperty();
   }, [propertyId]);
+
   return (
     <div className="home-properties" id="properties">
       {properties?.map((property) => (
         <ul key={property._id} className="prop-ul">
           {property.images.length > 0 && (
-            <Link key={property._id} to={`/property/${property._id}`}>
+            <Link to={`/property/${property._id}`}>
               <li>
                 <img
                   height={350}

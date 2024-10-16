@@ -1,5 +1,3 @@
-import React from "react";
-
 const Hero = () => {
   return (
     <div className="hero" id="about">
@@ -7,7 +5,7 @@ const Hero = () => {
         <h2 className="hero-h2">
           Choose Your Dream <span className="hero-house">HOUSE</span>
         </h2>
-        <h3 className="hero-h3">India's No.1 Real Estate Website </h3>
+        <h3 className="hero-h3">India`&apos;`s No.1 Real Estate Website </h3>
         <p className="hero-para">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi quidem
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, sit

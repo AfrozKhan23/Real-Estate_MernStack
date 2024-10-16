@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import { useFormik } from "formik";
@@ -10,7 +10,8 @@ import { AiTwotoneDelete } from "react-icons/ai";
 const AdminPanel = () => {
   const [pics, setPics] = useState([]);
   const [vid, setVid] = useState([]);
-  const [property, setProperty] = useState();
+  const [property, setProperty] = useState([]);
+  const [token, setToken] = useState(localStorage.getItem("token"));
 
   useEffect(() => {
     (async () => {
@@ -33,7 +34,11 @@ const AdminPanel = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${pathUrl}api/v1/property/delete/${id}`);
+      await axios.delete(`${pathUrl}api/v1/property/delete/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setProperty((prevProperty) =>
         prevProperty.filter((prop) => prop._id !== id)
       );
@@ -56,7 +61,7 @@ const AdminPanel = () => {
       name: yup.string().required("Name is Required"),
       email: yup.string().required("Email is Required"),
       phone: yup.string().required("Phone is Required"),
-      address: yup.string().required("address is Required"),
+      address: yup.string().required("Address is Required"),
       photos: yup.mixed().required("Image is required"),
       videos: yup.mixed().required("Video is required"),
     }),
@@ -84,7 +89,12 @@ const AdminPanel = () => {
       try {
         const response = await axios.post(
           `${pathUrl}api/v1/property/create`,
-          formData
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         setProperty([...property, response.data]);
         console.log("Property added successfully:", response.data);
