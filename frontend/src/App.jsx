@@ -2,8 +2,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppLayout from "./components/AppLayout";
 import Login from "./components/Login";
 import Property from "./components/Property";
-import "./App.scss";
 import Adminpanel from "./components/adminPanel";
+import PrivateRoute from "./components/PrivateRoute";
+import "./App.scss";
 
 const App = () => {
   return (
@@ -11,8 +12,16 @@ const App = () => {
       <Routes>
         <Route path="/" element={<AppLayout />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/admin" element={<Adminpanel />} />
         <Route path="/property/:id" element={<Property />} />
+
+        <Route
+          path="/admin"
+          element={
+            <PrivateRoute>
+              <Adminpanel />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

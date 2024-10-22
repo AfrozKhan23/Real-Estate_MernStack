@@ -16,14 +16,14 @@ const Login = () => {
     },
     validationSchema: yup.object({
       email: yup.string().required("Email is Required"),
-      // password: yup.string().required("Password is Required"),
+      password: yup.string().required("Password is Required"),
     }),
     onSubmit: async (values) => {
       const { email, password } = values;
       console.log("Form Submitted", values);
 
       try {
-        const response = await axios.post(`${pathUrl}api/v1/admin/login`, {
+        const response = await axios.post(`${pathUrl}api/v1/admin`, {
           email,
           password,
         });

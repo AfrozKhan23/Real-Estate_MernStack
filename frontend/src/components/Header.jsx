@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const isInAdminPanel = location.pathname.startsWith("/admin");
 
@@ -16,6 +17,7 @@ const Header = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("token");
     setIsLoggedIn(false);
     navigate("/");
   };
