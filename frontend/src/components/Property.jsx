@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import pathUrl from "../utils/Path";
+import pathUrl from "../utils/Path.js";
 
 const Property = () => {
   const { id } = useParams();
@@ -19,12 +19,11 @@ const Property = () => {
         const response = await axios.get(`${pathUrl}api/v1/property/${id}`);
         setProperty(response.data);
         console.log(response.data);
-        console.log(property);
       } catch (error) {
         console.log(error.message);
       }
     })();
-  }, [property, id]);
+  }, [id]);
 
   if (!property) {
     return <div>Loading...</div>;
@@ -45,18 +44,14 @@ const Property = () => {
       <div className="pro-grid">
         <div className="pro-images">
           {property.images.map((image, index) => (
-            <img
-              key={index}
-              src={`${pathUrl}${image}`}
-              alt={`Image ${index + 1}`}
-            />
+            <img key={index} src={image} alt={`Image ${index + 1}`} />
           ))}
         </div>
         <div className="pro-vid">
           {property.videos && (
             <video controls>
-              <source src={`${pathUrl}${property.videos}`} type="video/mp4" />
-              Your browser does not support the video tag.
+              <source src={property.videos} type="video/mp4" /> Your browser
+              does not support the video tag.
             </video>
           )}
         </div>

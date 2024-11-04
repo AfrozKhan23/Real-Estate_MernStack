@@ -70,7 +70,6 @@ const Login = () => {
         />
         <span className="form-error">{formik.errors.password}</span>
         {error && <p className="form-error">{error}</p>}{" "}
-        {/* Display any error message */}
         <button type="submit" className="form-btn">
           Login
         </button>

@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
-import Header from "./Header";
-import Footer from "./Footer";
+import Header from "./Header.jsx";
+import Footer from "./Footer.jsx";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import axios from "axios";
-import pathUrl from "../utils/Path";
+import pathUrl from "../utils/Path.js";
 import { AiTwotoneDelete } from "react-icons/ai";
 
 const AdminPanel = () => {
   const [pics, setPics] = useState([]);
-  const [vid, setVid] = useState([]);
+  const [vid, setVid] = useState(null);
   const [property, setProperty] = useState([]);
   const [token, setToken] = useState(localStorage.getItem("token"));
 
@@ -22,7 +22,7 @@ const AdminPanel = () => {
         console.log(error.message);
       }
     })();
-  }, [property]);
+  }, []);
 
   function handleImages(e) {
     setPics(e.target.files);
@@ -65,26 +65,18 @@ const AdminPanel = () => {
       photos: yup.mixed().required("Image is required"),
       videos: yup.mixed().required("Video is required"),
     }),
-    onSubmit: async (values, actions) => {
-      const formName = values.name;
-      const formEmail = values.email;
-      const formPhone = values.phone;
-      const formAddress = values.address;
-      const formImgs = pics;
-      const formVideo = vid;
-
+    onSubmit: async (values) => {
       const formData = new FormData();
-      formData.append("name", formName);
-      formData.append("email", formEmail);
-      formData.append("phone", formPhone);
-      formData.append("address", formAddress);
+      formData.append("name", values.name);
+      formData.append("email", values.email);
+      formData.append("phone", values.phone);
+      formData.append("address", values.address);
 
-      for (let i = 0; i < formImgs.length; i++) {
-        formData.append("photos", formImgs[i]);
-      }
+      pics.forEach((pic) => {
+        formData.append("photos", pic);
+      });
 
-      formData.append("videos", formVideo);
-      actions.resetForm();
+      formData.append("videos", vid);
 
       try {
         const response = await axios.post(
@@ -98,6 +90,17 @@ const AdminPanel = () => {
         );
         setProperty([...property, response.data]);
         console.log("Property added successfully:", response.data);
+
+        formik.setValues({
+          name: "",
+          email: "",
+          phone: "",
+          address: "",
+          photos: [],
+          videos: [],
+        });
+        setPics([]);
+        setVid(null);
       } catch (error) {
         console.log("Error adding property:", error);
       }
@@ -116,24 +119,20 @@ const AdminPanel = () => {
             encType="multipart/form-data"
           >
             <h1 className="aside-h1">Add Property</h1>
-            <label htmlFor="name" id="name">
-              Name :
-            </label>
+            <label htmlFor="name">Name :</label>
             <input
               className="admin-input1"
-              type="name"
+              type="text"
               name="name"
               id="name"
               placeholder="Enter your name..."
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
+              value={formik.values.name}
             />
             <p className="admin-error">{formik.errors.name}</p>
-            <br />
 
-            <label htmlFor="email" id="email">
-              Email :
-            </label>
+            <label htmlFor="email">Email :</label>
             <input
               className="admin-input2"
               type="email"
@@ -142,13 +141,11 @@ const AdminPanel = () => {
               placeholder="Enter your email..."
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
+              value={formik.values.email}
             />
             <p className="admin-error">{formik.errors.email}</p>
-            <br />
 
-            <label htmlFor="phone" id="phone">
-              Phone :
-            </label>
+            <label htmlFor="phone">Phone :</label>
             <input
               className="admin-input3"
               type="number"
@@ -157,13 +154,11 @@ const AdminPanel = () => {
               placeholder="Enter your phone number..."
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
+              value={formik.values.phone}
             />
-            <br />
             <p className="admin-error">{formik.errors.phone}</p>
 
-            <label htmlFor="address" id="address">
-              Address :
-            </label>
+            <label htmlFor="address">Address :</label>
             <textarea
               className="admin-textarea"
               name="address"
@@ -171,35 +166,33 @@ const AdminPanel = () => {
               placeholder="Enter property address..."
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
+              value={formik.values.address}
             />
             <p className="admin-error">{formik.errors.address}</p>
 
-            <label htmlFor="photos" id="photos">
-              Image :
-            </label>
+            <label htmlFor="photos">Image :</label>
             <input
               className="admin-img"
               type="file"
               name="photos"
               id="photos"
-              multiple={true}
-              onChange={(e) => handleImages(e)}
+              multiple
+              onChange={handleImages}
               onBlur={formik.handleBlur}
             />
             <p className="admin-error">{formik.errors.photos}</p>
-            <br />
-            <label htmlFor="videos" id="videos">
-              Video :
-            </label>
+
+            <label htmlFor="videos">Video :</label>
             <input
               className="admin-video"
               type="file"
               name="videos"
               id="videos"
-              onChange={(e) => handleVideo(e)}
+              onChange={handleVideo}
               onBlur={formik.handleBlur}
             />
-            <p className="admin-error">{formik.errors.photos}</p>
+            <p className="admin-error">{formik.errors.videos}</p>
+
             <button type="submit" className="prop-btn">
               Add property
             </button>
@@ -213,16 +206,18 @@ const AdminPanel = () => {
             <span>Phone</span>
           </div>
           <div>
-            {property?.map((prop) => (
+            {property.map((prop) => (
               <ul key={prop._id} className="admin-ul">
-                {prop.images.length > 0 && (
+                {prop.images && prop.images.length > 0 ? (
                   <li className="img-li">
                     <img
-                      src={`${pathUrl}${prop.images[0]}`}
+                      src={prop.images[0]}
                       alt="image"
                       className="dashboard-img"
                     />
                   </li>
+                ) : (
+                  <li>No images available.</li>
                 )}
                 <li className="prop-name">{prop.name}</li>
                 <li className="prop-address">{prop.address}</li>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import pathUrl from "../utils/Path";
+import pathUrl from "../utils/Path.js";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -21,6 +21,7 @@ const Properties = () => {
             Authorization: `Bearer ${token}`,
           },
         });
+
         setProperties(response.data);
       } catch (error) {
         console.error("Error fetching properties:", error.message);
@@ -42,7 +43,7 @@ const Properties = () => {
           {},
           {
             headers: {
-              Authorization: `Bearer ${token}`, // Include the token in the request
+              Authorization: `Bearer ${token}`,
             },
           }
         );
@@ -69,7 +70,7 @@ const Properties = () => {
                 <img
                   height={350}
                   width={350}
-                  src={`${pathUrl}${property.images[0]}`}
+                  src={property.images[0]}
                   alt="Property"
                   className="prop-img"
                   onClick={() => handlePropertyClick(property._id)}
