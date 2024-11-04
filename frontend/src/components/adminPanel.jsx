@@ -4,7 +4,6 @@ import Footer from "./Footer.jsx";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import axios from "axios";
-import pathUrl from "../utils/Path.js";
 import { AiTwotoneDelete } from "react-icons/ai";
 
 const AdminPanel = () => {
@@ -16,7 +15,9 @@ const AdminPanel = () => {
   useEffect(() => {
     (async () => {
       try {
-        const response = await axios.get(`${pathUrl}api/v1/property`);
+        const response = await axios.get(
+          `https://real-state-api-y6js.onrender.com/api/v1/property`
+        );
         setProperty(response.data);
       } catch (error) {
         console.log(error.message);
@@ -34,11 +35,14 @@ const AdminPanel = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${pathUrl}api/v1/property/delete/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await axios.delete(
+        `https://real-state-api-y6js.onrender.com/api/v1/property/delete/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       setProperty((prevProperty) =>
         prevProperty.filter((prop) => prop._id !== id)
       );
@@ -80,7 +84,7 @@ const AdminPanel = () => {
 
       try {
         const response = await axios.post(
-          `${pathUrl}api/v1/property/create`,
+          `https://real-state-api-y6js.onrender.com/api/v1/property/create`,
           formData,
           {
             headers: {

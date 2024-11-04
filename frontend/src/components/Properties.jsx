@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import pathUrl from "../utils/Path.js";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -16,11 +15,14 @@ const Properties = () => {
       try {
         const token = localStorage.getItem("token");
 
-        const response = await axios.get(`${pathUrl}api/v1/property`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get(
+          `https://real-state-api-y6js.onrender.com/api/v1/property`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         setProperties(response.data);
       } catch (error) {
@@ -39,7 +41,7 @@ const Properties = () => {
         const token = localStorage.getItem("token");
 
         const response = await axios.put(
-          `${pathUrl}api/v1/property/${propertyId}`,
+          `https://real-state-api-y6js.onrender.com/api/v1/property/${propertyId}`,
           {},
           {
             headers: {

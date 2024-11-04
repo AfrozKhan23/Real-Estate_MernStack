@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import pathUrl from "../utils/Path.js";
 
 const Property = () => {
   const { id } = useParams();
@@ -16,7 +15,9 @@ const Property = () => {
   useEffect(() => {
     (async () => {
       try {
-        const response = await axios.get(`${pathUrl}api/v1/property/${id}`);
+        const response = await axios.get(
+          `https://real-state-api-y6js.onrender.com/api/v1/property/${id}`
+        );
         setProperty(response.data);
         console.log(response.data);
       } catch (error) {
