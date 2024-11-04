@@ -1,4 +1,4 @@
 // const pathUrl = "http://localhost:4000/";
-const pathUrl = "";
+// const pathUrl = "";
 
-export default pathUrl;
+// export default pathUrl;
