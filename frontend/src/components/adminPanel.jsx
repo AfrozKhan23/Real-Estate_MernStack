@@ -76,9 +76,9 @@ const AdminPanel = () => {
       formData.append("phone", values.phone);
       formData.append("address", values.address);
 
-      pics.forEach((pic) => {
-        formData.append("photos", pic);
-      });
+       Array.from(pics).forEach((pic) => {
+    formData.append("photos", pic);
+  });
 
       formData.append("videos", vid);
 
