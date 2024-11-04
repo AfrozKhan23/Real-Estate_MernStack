@@ -23,10 +23,13 @@ const Login = () => {
       console.log("Form Submitted", values);
 
       try {
-        const response = await axios.post(`${pathUrl}api/v1/admin`, {
-          email,
-          password,
-        });
+        const response = await axios.post(
+          `https://real-state-api-y6js.onrender.com/api/v1/property/api/v1/admin`,
+          {
+            email,
+            password,
+          }
+        );
 
         if (response) {
           const { token } = response.data;
