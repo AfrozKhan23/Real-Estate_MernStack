@@ -2,7 +2,6 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import pathUrl from "../utils/Path";
 import { useState } from "react";
 
 const Login = () => {
@@ -24,7 +23,7 @@ const Login = () => {
 
       try {
         const response = await axios.post(
-          `https://real-state-api-y6js.onrender.com/api/v1/property/api/v1/admin`,
+          `https://real-state-api-y6js.onrender.com/api/v1/admin`,
           {
             email,
             password,
