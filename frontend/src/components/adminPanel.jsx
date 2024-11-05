@@ -88,6 +88,7 @@ const AdminPanel = () => {
           formData,
           {
             headers: {
+              "Content-Type": "multipart/form-data",
               Authorization: `Bearer ${token}`,
             },
           }
@@ -106,7 +107,18 @@ const AdminPanel = () => {
         setPics([]);
         setVid(null);
       } catch (error) {
-        console.log("Error adding property:", error);
+        if (error.response) {
+          // The request was made and the server responded with a status code outside 2xx
+          console.log("Response error:", error.response.data);
+          console.log("Response status:", error.response.status);
+          console.log("Response headers:", error.response.headers);
+        } else if (error.request) {
+          // The request was made but no response was received
+          console.log("Request error:", error.request);
+        } else {
+          // Something else happened in setting up the request
+          console.log("Error", error.message);
+        }
       }
     },
   });
