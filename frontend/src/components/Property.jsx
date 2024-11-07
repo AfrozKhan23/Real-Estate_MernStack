@@ -16,7 +16,7 @@ const Property = () => {
     (async () => {
       try {
         const response = await axios.get(
-          `https://real-state-api-y6js.onrender.com/api/v1/property/${id}`
+          `https://real-state-api-tbs5.onrender.com/api/v1/property/${id}`
         );
         setProperty(response.data);
         console.log(response.data);
