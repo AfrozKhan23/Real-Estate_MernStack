@@ -23,7 +23,7 @@ const Login = () => {
 
       try {
         const response = await axios.post(
-          `https://real-state-api-y6js.onrender.com/api/v1/admin`,
+          `https://real-state-api-tbs5.onrender.com/api/v1/admin`,
           {
             email,
             password,
