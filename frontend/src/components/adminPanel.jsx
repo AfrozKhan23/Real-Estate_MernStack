@@ -16,7 +16,7 @@ const AdminPanel = () => {
     (async () => {
       try {
         const response = await axios.get(
-          `https://real-state-api-y6js.onrender.com/api/v1/property`
+          `https://real-state-api-tbs5.onrender.com/api/v1/property`
         );
         setProperty(response.data);
       } catch (error) {
@@ -36,7 +36,7 @@ const AdminPanel = () => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(
-        `https://real-state-api-y6js.onrender.com/api/v1/property/delete/${id}`,
+        `https://real-state-api-tbs5.onrender.com/api/v1/property/delete/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -84,7 +84,7 @@ const AdminPanel = () => {
 
       try {
         const response = await axios.post(
-          `https://real-state-api-y6js.onrender.com/api/v1/property/create`,
+          `https://real-state-api-tbs5.onrender.com/api/v1/property/create`,
           formData,
           {
             headers: {
