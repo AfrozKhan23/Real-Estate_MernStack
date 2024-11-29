@@ -24,7 +24,7 @@ const AdminPanel = () => {
       }
     })();
   }, []);
-
+  // hello
   function handleImages(e) {
     setPics(e.target.files);
   }
