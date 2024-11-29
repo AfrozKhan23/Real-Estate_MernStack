@@ -16,7 +16,7 @@ const Properties = () => {
         const token = localStorage.getItem("token");
 
         const response = await axios.get(
-          `https://real-state-api-tbs5.onrender.com/api/v1/property`,
+          `http://localhost:4000/api/v1/property`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -41,7 +41,7 @@ const Properties = () => {
         const token = localStorage.getItem("token");
 
         const response = await axios.put(
-          `https://real-state-api-tbs5.onrender.com/api/v1/property/${propertyId}`,
+          `https://real-estate-mernstack.onrender.com/api/v1/property/${propertyId}`,
           {},
           {
             headers: {

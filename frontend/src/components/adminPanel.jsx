@@ -16,7 +16,7 @@ const AdminPanel = () => {
     (async () => {
       try {
         const response = await axios.get(
-          `https://real-state-api-tbs5.onrender.com/api/v1/property`
+          `https://real-estate-mernstack.onrender.com/api/v1/property`
         );
         setProperty(response.data);
       } catch (error) {
@@ -36,7 +36,7 @@ const AdminPanel = () => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(
-        `https://real-state-api-tbs5.onrender.com/api/v1/property/delete/${id}`,
+        `https://real-estate-mernstack.onrender.com/api/v1/property/delete/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -84,7 +84,7 @@ const AdminPanel = () => {
 
       try {
         const response = await axios.post(
-          `https://real-state-api-tbs5.onrender.com/api/v1/property/create`,
+          `https://real-estate-mernstack.onrender.com/api/v1/property/create`,
           formData,
           {
             headers: {
@@ -108,15 +108,12 @@ const AdminPanel = () => {
         setVid(null);
       } catch (error) {
         if (error.response) {
-          // The request was made and the server responded with a status code outside 2xx
           console.log("Response error:", error.response.data);
           console.log("Response status:", error.response.status);
           console.log("Response headers:", error.response.headers);
         } else if (error.request) {
-          // The request was made but no response was received
           console.log("Request error:", error.request);
         } else {
-          // Something else happened in setting up the request
           console.log("Error", error.message);
         }
       }
