@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import pathUrl from "../utils/Path";
 
 const Properties = () => {
   const [properties, setProperties] = useState([]);
@@ -15,14 +16,11 @@ const Properties = () => {
       try {
         const token = localStorage.getItem("token");
 
-        const response = await axios.get(
-          `http://localhost:4000/api/v1/property`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.get(`${pathUrl}api/v1/property`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         setProperties(response.data);
       } catch (error) {
@@ -41,7 +39,7 @@ const Properties = () => {
         const token = localStorage.getItem("token");
 
         const response = await axios.put(
-          `https://real-estate-mernstack.onrender.com/api/v1/property/${propertyId}`,
+          `${pathUrl}api/v1/property/${propertyId}`,
           {},
           {
             headers: {

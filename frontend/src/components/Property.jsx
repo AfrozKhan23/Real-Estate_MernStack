@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import pathUrl from "../utils/Path";
 
 const Property = () => {
   const { id } = useParams();
@@ -15,9 +16,7 @@ const Property = () => {
   useEffect(() => {
     (async () => {
       try {
-        const response = await axios.get(
-          `https://real-estate-mernstack.onrender.com/api/v1/property/${id}`
-        );
+        const response = await axios.get(`${pathUrl}api/v1/property/${id}`);
         setProperty(response.data);
         console.log(response.data);
       } catch (error) {

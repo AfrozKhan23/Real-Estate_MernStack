@@ -3,6 +3,7 @@ import * as yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import pathUrl from "../utils/Path";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -22,13 +23,10 @@ const Login = () => {
       console.log("Form Submitted", values);
 
       try {
-        const response = await axios.post(
-          `https://real-estate-mernstack.onrender.com/api/v1/admin`,
-          {
-            email,
-            password,
-          }
-        );
+        const response = await axios.post(`${pathUrl}api/v1/admin`, {
+          email,
+          password,
+        });
 
         if (response) {
           const { token } = response.data;

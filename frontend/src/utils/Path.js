@@ -1,4 +1,3 @@
-// const pathUrl = "http://localhost:4000/";
-// const pathUrl = "https://real-estate-mernstack.onrender.com/";
+const pathUrl = import.meta.env.VITE_BACKEND_URI;
 
-// export default pathUrl;
+export default pathUrl;

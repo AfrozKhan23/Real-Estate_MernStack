@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import axios from "axios";
 import { AiTwotoneDelete } from "react-icons/ai";
+import pathUrl from "../utils/Path.js";
 
 const AdminPanel = () => {
   const [pics, setPics] = useState([]);
@@ -15,9 +16,7 @@ const AdminPanel = () => {
   useEffect(() => {
     (async () => {
       try {
-        const response = await axios.get(
-          `https://real-estate-mernstack.onrender.com/api/v1/property`
-        );
+        const response = await axios.get(`${pathUrl}api/v1/property`);
         setProperty(response.data);
       } catch (error) {
         console.log(error.message);
@@ -35,14 +34,11 @@ const AdminPanel = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(
-        `https://real-estate-mernstack.onrender.com/api/v1/property/delete/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      await axios.delete(`${pathUrl}api/v1/property/delete/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setProperty((prevProperty) =>
         prevProperty.filter((prop) => prop._id !== id)
       );
@@ -84,7 +80,7 @@ const AdminPanel = () => {
 
       try {
         const response = await axios.post(
-          `https://real-estate-mernstack.onrender.com/api/v1/property/create`,
+          `${pathUrl}api/v1/property/create`,
           formData,
           {
             headers: {
@@ -129,7 +125,7 @@ const AdminPanel = () => {
             action="/"
             method="post"
             onSubmit={formik.handleSubmit}
-            encType="multipart/form-data"
+            encType="multipart/form-data" // need to understand what multipart does?
           >
             <h1 className="aside-h1">Add Property</h1>
             <label htmlFor="name">Name :</label>
