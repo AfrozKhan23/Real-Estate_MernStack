@@ -16,7 +16,7 @@ const AdminPanel = () => {
   useEffect(() => {
     (async () => {
       try {
-        const response = await axios.get(`${pathUrl}api/v1/property`);
+        const response = await axios.get(`${pathUrl}/api/v1/property`);
         setProperty(response.data);
       } catch (error) {
         console.log(error.message);
@@ -34,7 +34,7 @@ const AdminPanel = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${pathUrl}api/v1/property/delete/${id}`, {
+      await axios.delete(`${pathUrl}/api/v1/property/delete/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

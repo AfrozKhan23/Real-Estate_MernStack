@@ -16,7 +16,7 @@ const Properties = () => {
       try {
         const token = localStorage.getItem("token");
 
-        const response = await axios.get(`${pathUrl}api/v1/property`, {
+        const response = await axios.get(`${pathUrl}/api/v1/property`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -39,7 +39,7 @@ const Properties = () => {
         const token = localStorage.getItem("token");
 
         const response = await axios.put(
-          `${pathUrl}api/v1/property/${propertyId}`,
+          `${pathUrl}/api/v1/property/${propertyId}`,
           {},
           {
             headers: {

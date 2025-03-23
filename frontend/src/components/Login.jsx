@@ -23,7 +23,7 @@ const Login = () => {
       console.log("Form Submitted", values);
 
       try {
-        const response = await axios.post(`${pathUrl}api/v1/admin`, {
+        const response = await axios.post(`${pathUrl}/api/v1/admin`, {
           email,
           password,
         });
