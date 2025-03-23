@@ -80,7 +80,7 @@ const AdminPanel = () => {
 
       try {
         const response = await axios.post(
-          `${pathUrl}api/v1/property/create`,
+          `${pathUrl}/api/v1/property/create`,
           formData,
           {
             headers: {
