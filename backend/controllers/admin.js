@@ -2,7 +2,7 @@ import admin from "../models/admin.models.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = "process.env.JWT_SECRET";
+const JWT_SECRET = process.env.JWT_SECRET;
 
 const getAdmin = async (req, res) => {
   try {
@@ -56,7 +56,7 @@ const updateAdmin = async (req, res) => {
       { password: hash },
       {
         new: true,
-      }
+      },
     );
 
     if (!updateUser) {

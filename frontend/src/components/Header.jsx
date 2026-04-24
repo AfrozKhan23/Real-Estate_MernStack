@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
+import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -11,9 +12,15 @@ const Header = () => {
   const isInAdminPanel = location.pathname.startsWith("/admin");
 
   useEffect(() => {
-    const isLoggedInFromStorage = localStorage.getItem("isLoggedIn");
-    setIsLoggedIn(isLoggedInFromStorage === "true");
-  }, []);
+    const syncLoginState = () => {
+      const isLoggedInFromStorage = localStorage.getItem("isLoggedIn");
+      setIsLoggedIn(isLoggedInFromStorage === "true");
+    };
+
+    syncLoginState();
+    window.addEventListener("storage", syncLoginState);
+    return () => window.removeEventListener("storage", syncLoginState);
+  }, [location.pathname]);
 
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
@@ -24,63 +31,70 @@ const Header = () => {
 
   const scrollToSection = (id) => {
     const section = document.getElementById(id);
-    section.scrollIntoView({ behavior: "smooth" });
-  };
-
-  const handleLoginClick = () => {
-    if (isLoggedIn) {
-      navigate("/admin");
-    } else {
-      navigate("/login");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
     }
   };
 
+  const handleAuthClick = () => {
+    navigate(isLoggedIn ? "/admin" : "/login");
+  };
+
+  const handleNavClick = (sectionId) => {
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => scrollToSection(sectionId), 200);
+      return;
+    }
+
+    scrollToSection(sectionId);
+  };
+
   return (
-    <div className="header">
+    <header className="header">
       <Link to="/" className="link">
         <span className="header-title">Property.</span>
       </Link>
-      <span className="header-nav">
-        <Link to="/" className="link">
-          <span
-            className="head-nav"
-            onClick={() => scrollToSection("properties")}
-          >
-            Properties
-          </span>
-        </Link>
-        <Link to="/" className="link">
-          <span className="head-nav" onClick={() => scrollToSection("about")}>
-            About
-          </span>
-        </Link>
-        <span className="head-nav" onClick={() => scrollToSection("footer")}>
+      <nav className="header-nav">
+        <button
+          type="button"
+          className="head-nav"
+          onClick={() => handleNavClick("properties")}
+        >
+          Properties
+        </button>
+        <button
+          type="button"
+          className="head-nav"
+          onClick={() => handleNavClick("about")}
+        >
+          About
+        </button>
+        <button
+          type="button"
+          className="head-nav"
+          onClick={() => handleNavClick("footer")}
+        >
           Contact
-        </span>
+        </button>
         {isLoggedIn && isInAdminPanel ? (
-          <button className="login-btn" onClick={handleLogout}>
-            <span>
-              <LogoutIcon fontSize="small" className="login-icon" />
-            </span>
+          <button className="login-btn logout-btn" onClick={handleLogout}>
+            <LogoutIcon fontSize="small" className="login-icon" />
             <span>Logout</span>
           </button>
         ) : isLoggedIn ? (
-          <button className="login-btn" onClick={handleLoginClick}>
-            <span>
-              <LoginIcon fontSize="small" className="login-icon" />
-            </span>
+          <button className="login-btn" onClick={handleAuthClick}>
+            <DashboardRoundedIcon fontSize="small" className="login-icon" />
             <span>Dashboard</span>
           </button>
         ) : (
-          <button className="login-btn" onClick={handleLoginClick}>
-            <span>
-              <LoginIcon fontSize="small" className="login-icon" />
-            </span>
+          <button className="login-btn" onClick={handleAuthClick}>
+            <LoginIcon fontSize="small" className="login-icon" />
             <span>Login</span>
           </button>
         )}
-      </span>
-    </div>
+      </nav>
+    </header>
   );
 };
 

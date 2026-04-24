@@ -1,8 +1,7 @@
-configDotenv();
+import "dotenv/config";
 import express from "express";
 import connectDb from "./config/dbConn.js";
 import cors from "cors";
-import { configDotenv } from "dotenv";
 import admin from "./routes/admin.routes.js";
 import property from "./routes/property.routes.js";
 

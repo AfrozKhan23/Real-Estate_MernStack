@@ -1,51 +1,65 @@
-import React from "react";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div className="footer" id="footer">
-      <div className="footer-1">
-        <div className="footer-head">Useful Links</div>
-        <div className="footer-links">Services</div>
-        <div className="footer-links">Careers</div>
-        <div className="footer-links">Our Team</div>
-        <div className="footer-links">Our Clients</div>
+    <footer className="footer" id="footer">
+      <div className="footer-column">
+        <h3 className="footer-head">Useful Links</h3>
+        <Link to="/" className="footer-link">
+          Properties
+        </Link>
+        <button
+          type="button"
+          className="footer-link footer-link-btn"
+          onClick={() =>
+            document
+              .getElementById("about")
+              ?.scrollIntoView({ behavior: "smooth" })
+          }
+        >
+          About
+        </button>
+        <span className="footer-link">Services</span>
+        <span className="footer-link">Careers</span>
       </div>
 
-      <div className="footer-2">
-        <div className="footer-head">NEWSLETTER</div>
+      <div className="footer-column">
+        <h3 className="footer-head">Newsletter</h3>
+        <p className="footer-text">
+          Get exclusive property updates and market insights.
+        </p>
         <input
           className="footer-input"
-          type="text"
+          type="email"
           placeholder="Your Email Address"
         />
-        <br />
-        <button className="footer-btn">SUBSCRIBE NOW</button>
+        <button className="footer-btn">Subscribe Now</button>
       </div>
 
-      <div className="footer-3">
-        <div className="footer-head">Contact Us</div>
-        <div className="footeer-content">property@gmail.com </div>
-        <div className="footer-content">Mumbai, Maharashtra, IN</div>
+      <div className="footer-column">
+        <h3 className="footer-head">Contact Us</h3>
+        <p className="footer-text">property@gmail.com</p>
+        <p className="footer-text">Mumbai, Maharashtra, IN</p>
         <div className="footer-socials">
-          <span>
+          <a href="#" aria-label="Facebook" className="footer-social-link">
             <FacebookRoundedIcon />
-          </span>
-          <span>
+          </a>
+          <a href="#" aria-label="Twitter" className="footer-social-link">
             <TwitterIcon />
-          </span>
-          <span>
+          </a>
+          <a href="#" aria-label="LinkedIn" className="footer-social-link">
             <LinkedInIcon />
-          </span>
-          <span>
+          </a>
+          <a href="#" aria-label="Instagram" className="footer-social-link">
             <InstagramIcon />
-          </span>
+          </a>
         </div>
       </div>
-    </div>
+    </footer>
   );
 };
 

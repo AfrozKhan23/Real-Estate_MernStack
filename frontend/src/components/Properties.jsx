@@ -5,11 +5,7 @@ import pathUrl from "../utils/Path";
 
 const Properties = () => {
   const [properties, setProperties] = useState([]);
-  const [propertyId, setPropertyId] = useState();
-
-  const handlePropertyClick = (id) => {
-    setPropertyId(id);
-  };
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProperties = async () => {
@@ -25,64 +21,56 @@ const Properties = () => {
         setProperties(response.data);
       } catch (error) {
         console.error("Error fetching properties:", error.message);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchProperties();
   }, []);
 
-  useEffect(() => {
-    const updateProperty = async () => {
-      if (!propertyId) return;
-
-      try {
-        const token = localStorage.getItem("token");
-
-        const response = await axios.put(
-          `${pathUrl}/api/v1/property/${propertyId}`,
-          {},
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setProperties((prevProperties) =>
-          prevProperties.map((prop) =>
-            prop._id === propertyId ? response.data : prop
-          )
-        );
-      } catch (error) {
-        console.error("Error updating property:", error.message);
-      }
-    };
-
-    updateProperty();
-  }, [propertyId]);
-
   return (
-    <div className="home-properties" id="properties">
-      {properties?.map((property) => (
-        <ul key={property._id} className="prop-ul">
-          {property.images.length > 0 && (
-            <Link to={`/property/${property._id}`}>
-              <li>
-                <img
-                  height={350}
-                  width={350}
-                  src={property.images[0]}
-                  alt="Property"
-                  className="prop-img"
-                  onClick={() => handlePropertyClick(property._id)}
-                />
-              </li>
-            </Link>
-          )}
-          <p className="prop-name">{property.name}</p>
-          <p className="prop-address">{property.address}</p>
-        </ul>
-      ))}
-    </div>
+    <section className="home-properties" id="properties">
+      <div className="properties-head">
+        <h2>Featured Properties</h2>
+        <p>Explore handpicked listings with complete details and media.</p>
+      </div>
+      <div className="properties-grid">
+        {loading ? (
+          <p className="properties-state">Loading properties...</p>
+        ) : properties.length === 0 ? (
+          <p className="properties-state">No properties available right now.</p>
+        ) : (
+          properties.map((property) => (
+            <article key={property._id} className="prop-card">
+              {property.images?.length > 0 ? (
+                <Link
+                  to={`/property/${property._id}`}
+                >
+                  <img
+                    src={property.images[0]}
+                    alt={property.name}
+                    className="prop-img"
+                  />
+                </Link>
+              ) : (
+                <div className="prop-img-fallback">No image available</div>
+              )}
+              <div className="prop-card-content">
+                <h3 className="prop-name">{property.name}</h3>
+                <p className="prop-address">{property.address}</p>
+                <Link
+                  to={`/property/${property._id}`}
+                  className="prop-view-btn"
+                >
+                  View Details
+                </Link>
+              </div>
+            </article>
+          ))
+        )}
+      </div>
+    </section>
   );
 };
 
